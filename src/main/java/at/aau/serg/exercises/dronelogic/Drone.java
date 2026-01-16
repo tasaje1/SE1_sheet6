@@ -2,46 +2,26 @@ package at.aau.serg.exercises.dronelogic;
 
 public class Drone {
 
-    public String serialNumber;
+    private String serialNumber;
 
-    public Integer firmwareVersion;
+    private Integer firmwareVersion;
 
-    /**
-     * Allowed types: Surveyor, Guardian, Courier
-     */
-    public String droneType;
+    private String droneType;
 
-    public double payload;
+    private double payload;
 
-    /**
-     * Used for scan and high-altitude modes, low-altitude ignores this value
-     */
-    public int operationRange;
+    private int operationRange;
 
-    /**
-     * 1 := lowAltitude (guardian always has this disabled)
-     * 2 := highAltitude
-     * 3 := scan (only surveyor has this, always)
-     */
-    public short operationMode;
+    private short operationMode;
 
-    /**
-     * None (null), thermal, camera, jammer, medical
-     */
-    public String payloadEffect;
+    private String payloadEffect;
 
-    /**
-     * Indicates if a guardian currently has their shield mode enabled
-     */
-    public boolean shieldModeEnabled;
+    private boolean shieldModeEnabled;
 
-    /**
-     * Available battery of surveyor
-     */
-    public int battery;
+    private int battery;
 
     public String getDescription() {
-        switch (droneType) {
+        switch (getDroneType()) {
             case "Surveyor":
                 return "Surveyor: A drone specialized in scanning and mapping areas.";
             case "Guardian":
@@ -49,11 +29,103 @@ public class Drone {
             case "Courier":
                 return "Courier: A drone optimized for fast package delivery.";
             default:
-                throw new IllegalStateException("Unexpected drone type: " + droneType);
+                throw new IllegalStateException("Unexpected drone type: " + getDroneType());
         }
     }
 
     public boolean isCertified() {
-        return firmwareVersion.equals(12);
+        return getFirmwareVersion().equals(12);
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public Integer getFirmwareVersion() {
+        return firmwareVersion;
+    }
+
+    public void setFirmwareVersion(Integer firmwareVersion) {
+        this.firmwareVersion = firmwareVersion;
+    }
+
+    /**
+     * Allowed types: Surveyor, Guardian, Courier
+     */
+    public String getDroneType() {
+        return droneType;
+    }
+
+    public void setDroneType(String droneType) {
+        this.droneType = droneType;
+    }
+
+    public double getPayload() {
+        return payload;
+    }
+
+    public void setPayload(double payload) {
+        this.payload = payload;
+    }
+
+    /**
+     * Used for scan and high-altitude modes, low-altitude ignores this value
+     */
+    public int getOperationRange() {
+        return operationRange;
+    }
+
+    public void setOperationRange(int operationRange) {
+        this.operationRange = operationRange;
+    }
+
+    /**
+     * 1 := lowAltitude (guardian always has this disabled)
+     * 2 := highAltitude
+     * 3 := scan (only surveyor has this, always)
+     */
+    public short getOperationMode() {
+        return operationMode;
+    }
+
+    public void setOperationMode(short operationMode) {
+        this.operationMode = operationMode;
+    }
+
+    /**
+     * None (null), thermal, camera, jammer, medical
+     */
+    public String getPayloadEffect() {
+        return payloadEffect;
+    }
+
+    public void setPayloadEffect(String payloadEffect) {
+        this.payloadEffect = payloadEffect;
+    }
+
+    /**
+     * Indicates if a guardian currently has their shield mode enabled
+     */
+    public boolean isShieldModeEnabled() {
+        return shieldModeEnabled;
+    }
+
+    public void setShieldModeEnabled(boolean shieldModeEnabled) {
+        this.shieldModeEnabled = shieldModeEnabled;
+    }
+
+    /**
+     * Available battery of surveyor
+     */
+    public int getBattery() {
+        return battery;
+    }
+
+    public void setBattery(int battery) {
+        this.battery = battery;
     }
 }
