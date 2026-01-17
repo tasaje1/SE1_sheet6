@@ -42,10 +42,10 @@ public class GameBoard {
         }
 
         // place the enemies
-        for (int i = 0; i < enemies.size(); i++) { //+1
-            Enemy enemy = enemies.get(i);
+        for (Enemy enemy : enemies) {
             initializeEnemy(enemy, random);
         }
+
 
     }
     private void initializeField(int row, int col, Random random) {
