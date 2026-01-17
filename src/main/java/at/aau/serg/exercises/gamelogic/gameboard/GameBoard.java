@@ -44,21 +44,7 @@ public class GameBoard {
         // place the enemies
         for (int i = 0; i < enemies.size(); i++) { //+1
             Enemy enemy = enemies.get(i);
-            if (enemy.health == 0) { //+1
-                continue;
-            } else {
-                var x = random.nextInt(5);
-                var y = random.nextInt(5);
-                enemy.pos = new Position(x, y);
-
-                if (enemy.type == Enemy.EnemyType.BOSS) { //+1
-                    enemy.damageMult = damageMultiplier[x][y] * 1.5;
-                    enemy.speedMult = walkingmultiplier[x][y] * 1.5;
-                } else {
-                    enemy.damageMult = damageMultiplier[x][y];
-                    enemy.speedMult = walkingmultiplier[x][y];
-                }
-            }
+            initializeEnemy(enemy, random);
         }
 
     }
@@ -83,6 +69,24 @@ public class GameBoard {
                 damageMultiplier[row][col] = 1;
         }
     }
+    private void initializeEnemy(Enemy enemy, Random random) {
+        if (enemy.health == 0) {
+            return;
+        }
+
+        int x = random.nextInt(5);
+        int y = random.nextInt(5);
+        enemy.pos = new Position(x, y);
+
+        if (enemy.type == Enemy.EnemyType.BOSS) {
+            enemy.damageMult = damageMultiplier[x][y] * 1.5;
+            enemy.speedMult = walkingmultiplier[x][y] * 1.5;
+        } else {
+            enemy.damageMult = damageMultiplier[x][y];
+            enemy.speedMult = walkingmultiplier[x][y];
+        }
+    }
+
 
 
     // Enum for the field types
