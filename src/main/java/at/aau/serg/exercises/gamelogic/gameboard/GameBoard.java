@@ -34,27 +34,8 @@ public class GameBoard {
         Random random = new Random();
         for (int row = 0; row < 5; row++) { //+1
             for (int col = 0; col < 5; col++) { //+1
-                board[row][col] = Type.values()[random.nextInt(Type.values().length)];
 
-                switch (board[row][col]) { //+1
-                    case GRASS:
-                    case ROCK: //+1
-                        walkingmultiplier[row][col] = 1;
-                        damageMultiplier[row][col] = 1;
-                        break;
-                    case WOODS://+1
-                        walkingmultiplier[row][col] = .7;
-                        damageMultiplier[row][col] = 1.2;
-                        break;
-                    case SPECIAL://+1
-                        damageMultiplier[row][col] = 2;
-                        break;
-                    default:
-                        walkingmultiplier[row][col] = 1;
-                        damageMultiplier[row][col] = 1;
-                        break;
-                }
-
+                initializeField(row, col, random);
                 System.out.print(board[row][col] + ", ");
             }
             System.out.println();
@@ -81,6 +62,28 @@ public class GameBoard {
         }
 
     }
+    private void initializeField(int row, int col, Random random) {
+        board[row][col] = Type.values()[random.nextInt(Type.values().length)];
+
+        switch (board[row][col]) {
+            case GRASS:
+            case ROCK:
+                walkingmultiplier[row][col] = 1;
+                damageMultiplier[row][col] = 1;
+                break;
+            case WOODS:
+                walkingmultiplier[row][col] = .7;
+                damageMultiplier[row][col] = 1.2;
+                break;
+            case SPECIAL:
+                damageMultiplier[row][col] = 2;
+                break;
+            default:
+                walkingmultiplier[row][col] = 1;
+                damageMultiplier[row][col] = 1;
+        }
+    }
+
 
     // Enum for the field types
     public enum Type {
