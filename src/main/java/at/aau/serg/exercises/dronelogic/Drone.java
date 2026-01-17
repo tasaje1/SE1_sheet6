@@ -2,11 +2,16 @@ package at.aau.serg.exercises.dronelogic;
 
 public class Drone {
 
+    public enum droneType{
+        SURVEYOR,
+        GUARDIAN,
+        COURTIER
+    }
     private String serialNumber;
 
     private Integer firmwareVersion;
 
-    private String droneType;
+    private droneType droneType;
 
     private double payload;
 
@@ -22,11 +27,11 @@ public class Drone {
 
     public String getDescription() {
         switch (getDroneType()) {
-            case "Surveyor":
+            case SURVEYOR:
                 return "Surveyor: A drone specialized in scanning and mapping areas.";
-            case "Guardian":
+            case GUARDIAN:
                 return "Guardian: A drone designed to patrol and protect zones.";
-            case "Courier":
+            case COURTIER:
                 return "Courier: A drone optimized for fast package delivery.";
             default:
                 throw new IllegalStateException("Unexpected drone type: " + getDroneType());
@@ -53,16 +58,19 @@ public class Drone {
         this.firmwareVersion = firmwareVersion;
     }
 
-    /**
-     * Allowed types: Surveyor, Guardian, Courier
-     */
-    public String getDroneType() {
+    public Drone.droneType getDroneType() {
         return droneType;
     }
 
-    public void setDroneType(String droneType) {
+    public void setDroneType(Drone.droneType droneType) {
         this.droneType = droneType;
     }
+
+    /**
+     * Allowed types: Surveyor, Guardian, Courier
+     */
+
+
 
     public double getPayload() {
         return payload;
