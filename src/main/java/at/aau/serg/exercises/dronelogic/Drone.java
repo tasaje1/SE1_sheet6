@@ -6,7 +6,23 @@ public abstract class Drone {
     private double payload;
 
 
+    public enum PayloadEffect {
+        THERMAL,
+        CAMERA,
+        JAMMER,
+        MEDICAL
+    }
 
+    private PayloadEffect payloadEffect;
+
+
+    public PayloadEffect getPayloadEffect() {
+        return payloadEffect;
+    }
+
+    public void setPayloadEffect(PayloadEffect payloadEffect) {
+        this.payloadEffect = payloadEffect;
+    }
 
     public boolean isCertified() {
         return firmwareVersion != null & firmwareVersion.equals(12);
