@@ -49,25 +49,11 @@ public class GameBoard {
 
     }
     private void initializeField(int row, int col, Random random) {
-        board[row][col] = Type.values()[random.nextInt(Type.values().length)];
+        Type type = Type.values()[random.nextInt(Type.values().length)];
+        board[row][col] = type;
 
-        switch (board[row][col]) {
-            case GRASS:
-            case ROCK:
-                walkingmultiplier[row][col] = 1;
-                damageMultiplier[row][col] = 1;
-                break;
-            case WOODS:
-                walkingmultiplier[row][col] = .7;
-                damageMultiplier[row][col] = 1.2;
-                break;
-            case SPECIAL:
-                damageMultiplier[row][col] = 2;
-                break;
-            default:
-                walkingmultiplier[row][col] = 1;
-                damageMultiplier[row][col] = 1;
-        }
+        walkingmultiplier[row][col] = type.walkingMultiplier;
+        damageMultiplier[row][col] = type.damageMultiplier;
     }
     private void initializeEnemy(Enemy enemy, Random random) {
         if (enemy.health == 0) {
@@ -91,10 +77,18 @@ public class GameBoard {
 
     // Enum for the field types
     public enum Type {
-        GRASS,
-        WOODS,
-        ROCK,
-        SPECIAL
+        GRASS(1.0, 1.0),
+        ROCK(1.0, 1.0),
+        WOODS(0.7, 1.2),
+        SPECIAL(1.0, 2.0);
+
+        public final double walkingMultiplier;
+        public final double damageMultiplier;
+
+        Type(double walkingMultiplier, double damageMultiplier) {
+            this.walkingMultiplier = walkingMultiplier;
+            this.damageMultiplier = damageMultiplier;
+        }
     }
 
 }
