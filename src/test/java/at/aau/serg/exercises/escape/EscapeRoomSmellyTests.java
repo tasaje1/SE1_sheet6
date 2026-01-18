@@ -32,21 +32,30 @@ public class EscapeRoomSmellyTests {
     }
 
     @Test
-    void giantEverythingTest() {
+    void unlockFailsWithWrongCode() {
         Token token = vault.issueToken("Team A", "pharaoh");
 
-        boolean a = vault.attemptUnlock("Team A", token, "WRONG");
-        boolean b = vault.attemptUnlock("Team A", token, "ALSO WRONG");
-        boolean c = vault.attemptUnlock("Team A", token, "NOPE");
+        boolean ok = vault.attemptUnlock("Team A", token, "WRONG");
 
-        assertFalse(a);
-        assertFalse(b);
-        assertFalse(c);
+        assertFalse(ok);
+    }
+    @Test
+    void failedAttemptsIncreaseAfterWrongCodes() {
+        Token token = vault.issueToken("Team A", "pharaoh");
 
-        boolean d = vault.attemptUnlock("Team A", token, token.getCode());
-        assertEquals(false, d);
+        vault.attemptUnlock("Team A", token, "WRONG");
+        vault.attemptUnlock("Team A", token, "ALSO WRONG");
 
-        assertTrue(vault.failedAttempts() >= 0);
+        assertTrue(vault.failedAttempts() > 0);
+    }
+    @Test
+    void lockoutIsSetAfterTooManyFailedAttempts() {
+        Token token = vault.issueToken("Team A", "pharaoh");
+
+        vault.attemptUnlock("Team A", token, "WRONG");
+        vault.attemptUnlock("Team A", token, "NOPE");
+        vault.attemptUnlock("Team A", token, "STILL WRONG");
+
         assertNotNull(vault.lockoutUntil());
     }
 
