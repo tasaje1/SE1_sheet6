@@ -71,13 +71,12 @@ public class EscapeRoomSmellyTests {
     }
 
     @Test
-    void testThrow() {
-        try {
-            vault.issueToken("", "skull");
-        } catch (Exception e) {
-            assertTrue(true);
-        }
+    void issueTokenFailsForEmptyTeamName() {
+        assertThrows(Exception.class, () ->
+                vault.issueToken("", "skull")
+        );
     }
+
 
     @Test
     void expiryTest() {
