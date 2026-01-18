@@ -85,16 +85,34 @@ public class EscapeRoomSmellyTests {
         assertTrue(ok || !ok);
     }
 
+    /*
     @Test
     void auditStringChecks() {
         Token token = vault.issueToken("Team B", "skull");
         String details = audit.events().get(audit.events().size() - 1).getDetails();
 
-        // Overspecified + weak checks
+        /* Overspecified + weak checks
         assertTrue(details.contains("code=" + token.getCode()));
         assertTrue(details.contains("expiresAt="));
         assertTrue(details.length() > 10);
+
+
+
     }
+    */
+    @Test
+    void auditLogContainsEntryAfterTokenIssuance() {
+        Token token = vault.issueToken("Team B", "skull");
+
+        assertFalse(audit.events().isEmpty());
+
+        String details = audit.events()
+                .get(audit.events().size() - 1)
+                .getDetails();
+
+        assertNotNull(details);
+    }
+
 
     @AfterEach
     void teardown() {
