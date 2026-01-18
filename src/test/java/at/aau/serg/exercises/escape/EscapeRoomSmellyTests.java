@@ -24,7 +24,6 @@ public class EscapeRoomSmellyTests {
 
     @Test
     void test1() throws Exception {
-        Thread.sleep(5);
 
         Token token = vault.issueToken("Team Rocket", "skull");
         boolean ok = vault.attemptUnlock("Team Rocket", token, token.getCode());
@@ -53,13 +52,11 @@ public class EscapeRoomSmellyTests {
 
     @Test
     void randomFuzz() {
-        Random r = new Random();
-        String team = "Team-" + r.nextInt(9999);
-        String theme = r.nextBoolean() ? "skull" : "mummy";
 
-        Token token = vault.issueToken(team, theme);
-        String typed = r.nextBoolean() ? token.getCode() : "garbage";
-        boolean ok = vault.attemptUnlock(team, token, typed);
+
+        Token token = vault.issueToken("Team A", "tiger");
+
+        boolean ok = vault.attemptUnlock("Team A", token, "WRONG-CODE");
 
 
     }
