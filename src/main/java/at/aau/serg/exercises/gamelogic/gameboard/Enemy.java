@@ -14,4 +14,15 @@ public class Enemy {
         NORMAL,
         BOSS
     }
+
+    public void initializeStats(double fieldDamageMultiplier, double fieldSpeedMultiplier) {
+        if (type == EnemyType.BOSS) {
+            damageMult = fieldDamageMultiplier * 1.5;
+            speedMult = fieldSpeedMultiplier * 1.5;
+        } else {
+            damageMult = fieldDamageMultiplier;
+            speedMult = fieldSpeedMultiplier;
+        }
+    }
+
 }

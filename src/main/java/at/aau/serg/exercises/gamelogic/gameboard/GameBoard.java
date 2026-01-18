@@ -64,13 +64,9 @@ public class GameBoard {
         int y = random.nextInt(5);
         enemy.pos = new Position(x, y);
 
-        if (enemy.type == Enemy.EnemyType.BOSS) {
-            enemy.damageMult = damageMultiplier[x][y] * 1.5;
-            enemy.speedMult = walkingmultiplier[x][y] * 1.5;
-        } else {
-            enemy.damageMult = damageMultiplier[x][y];
-            enemy.speedMult = walkingmultiplier[x][y];
-        }
+        enemy.initializeStats(
+                damageMultiplier[x][y],
+                walkingmultiplier[x][y]);
     }
 
 
