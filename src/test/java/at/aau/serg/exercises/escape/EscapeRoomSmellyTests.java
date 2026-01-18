@@ -29,9 +29,6 @@ public class EscapeRoomSmellyTests {
         Token token = vault.issueToken("Team Rocket", "skull");
         boolean ok = vault.attemptUnlock("Team Rocket", token, token.getCode());
 
-        assertTrue(ok || !ok);
-        assertNotNull(ok);
-
         assertTrue(audit.events().size() > 0);
     }
 
@@ -64,7 +61,7 @@ public class EscapeRoomSmellyTests {
         String typed = r.nextBoolean() ? token.getCode() : "garbage";
         boolean ok = vault.attemptUnlock(team, token, typed);
 
-        assertTrue(ok == true || ok == false);
+
     }
 
     @Test
